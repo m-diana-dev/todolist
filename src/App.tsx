@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import TodoList, {TaskType} from "./TodoList";
 import {v1} from "uuid";
+import {AddItemForm} from "./AddItemForm";
 
 export type FilterValuesType = "all" | "active" | "completed"
 
@@ -46,6 +47,14 @@ function App(): JSX.Element {
         } : el)
         setTodoLists(updateTodoLists)
     }
+
+    const changeTodoListTitle = (title:string, todoListId: string) => {
+        const updateTodoLists: TodoListType[] = todoLists.map(el => el.id === todoListId ? {
+            ...el,
+            title
+        } : el)
+        setTodoLists(updateTodoLists)
+    }
     const removeTask = (taskId: string, todoListId: string) => {
         // const tasksForTodoList: TaskType[] = tasks[todoListId];
         // const updatedTasks: TaskType[] = tasksForTodoList.filter((t) => t.id !== taskId);
@@ -64,7 +73,10 @@ function App(): JSX.Element {
 
         setTasks({...tasks, [todoListId]: tasks[todoListId].map(el=>el.id===taskId ? {...el, isDone: newIsDoneValue} : el)})
 
-        // setTasks(tasks.map(t => t.id === taskId ? {...t, isDone: newIsDoneValue} : t))
+    }
+
+    const changeTaskTitle = (taskId: string, newTitle: string, todoListId: string)=>{
+        setTasks({...tasks, [todoListId]: tasks[todoListId].map(el=>el.id===taskId ? {...el, title: newTitle} : el)})
     }
     const removeTodoList = (todoListId: string) => {
         setTodoLists(todoLists.filter(el=>el.id!==todoListId));
@@ -72,6 +84,14 @@ function App(): JSX.Element {
         delete tasks[todoListId];
         setTasks(copyTasks)
     }
+    const addTodoList = (title: string) => {
+        const newTodoId = v1();
+        const newTodo: TodoListType = {id: newTodoId, title, filter:'all'}
+        setTodoLists([...todoLists, newTodo])
+        setTasks({...tasks, [newTodoId]: []})
+    }
+
+    const maxTodoListTitleLength = 15;
     const getFilteredTasks =
         (allTasks: Array<TaskType>, currentFilterValue: FilterValuesType): Array<TaskType> => {
             switch (currentFilterValue) {
@@ -97,6 +117,8 @@ function App(): JSX.Element {
                 changeFilter={changeFilter}
                 changeTaskStatus={changeTaskStatus}
                 removeTodoList={removeTodoList}
+                changeTaskTitle={changeTaskTitle}
+                changeTodoListTitle={changeTodoListTitle}
             />
         )
     })
@@ -105,6 +127,9 @@ function App(): JSX.Element {
 
     return (
         <div className="App">
+            <div className={"add-form"}>
+            <AddItemForm maxItemTitleLength={maxTodoListTitleLength} addItem={addTodoList}/>
+            </div>
             {todoListsComponents}
         </div>
     );
