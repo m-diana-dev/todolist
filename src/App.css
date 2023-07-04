@@ -1,15 +1,15 @@
-.App {
-  padding: 30px;
-  display: flex;
-}
+/*.App {*/
+/*  padding: 30px;*/
+/*  display: flex;*/
+/*}*/
 
-.App > div {
-  margin-right: 50px;
-}
+/*.App > div {*/
+/*  margin-right: 50px;*/
+/*}*/
 .todoList {
-  border: 1px solid green;
+  border: 1px solid #482880;
   border-radius: 3px;
-  background-color: yellowgreen;
+  background-color: #9983c7;
   padding: 20px;
 }
 .tasks-list {
@@ -46,9 +46,13 @@
   outline: none;
 }
 .add-form{
-  border: 1px solid green;
+  border: 1px solid #482880;
   border-radius: 3px;
-  background-color: yellowgreen;
+  background-color: #ffcf33;
   padding: 20px;
-  height: 100%;
+}
+
+.form-wrapp{
+  display: flex;
+  align-items: center;
 }

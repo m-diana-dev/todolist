@@ -6,6 +6,9 @@ import {faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
 import {faTrash} from '@fortawesome/free-solid-svg-icons'
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import Button from '@mui/material/Button';
+import {Checkbox, IconButton} from "@mui/material";
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 
 type TodoListPropsType = {
     todoLIstId: string
@@ -42,15 +45,13 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                     return (
                         <li key={task.id} className={"tasks-list-item"}>
                             <div>
-                                <input
-                                    type="checkbox"
-                                    checked={task.isDone}
-                                    onChange={changeTaskStatus}
-                                />
-
+                                <Checkbox size={"small"} checked={task.isDone}
+                                          onChange={changeTaskStatus}/>
                                 <EditableSpan classes={task.isDone ? "task-done" : "task"} title={task.title} changeTitle={changeTaskTitle}/>
                             </div>
-                            <button onClick={removeTask}>x</button>
+                            <IconButton size={'small'} onClick={removeTask}>
+                                <HighlightOffRoundedIcon/>
+                            </IconButton>
                         </li>
                     )
                 })
@@ -65,23 +66,25 @@ const TodoList: FC<TodoListPropsType> = (props) => {
         <div className="todoList">
             <h3 className={"todolist-header"}>
                 <EditableSpan title={props.title} classes={''} changeTitle={changeTodoListTitle}/>
-                <button onClick={()=>props.removeTodoList(props.todoLIstId)}>x</button>
+                <IconButton size={'small'} onClick={()=>props.removeTodoList(props.todoLIstId)}>
+                    <HighlightOffRoundedIcon/>
+                </IconButton>
             </h3>
             <AddItemForm maxItemTitleLength={maxTaskTitleLength} addItem={addTask}/>
             {tasksList}
             <div className={"buttons-block"}>
-                <button
-                    className={props.filter === "all" ? "btn-filter-active" : undefined}
+                <Button variant={"contained"} size={"small"}
+                    color={props.filter === "all" ? "secondary" : "primary"}
                     onClick={() => props.changeFilter("all", props.todoLIstId)}>All
-                </button>
-                <button
-                    className={props.filter === "active" ? "btn-filter-active" : undefined}
+                </Button>
+                <Button variant={"contained"} size={"small"}
+                    color={props.filter === "active" ? "secondary" : "primary"}
                     onClick={() => props.changeFilter("active", props.todoLIstId)}>Active
-                </button>
-                <button
-                    className={props.filter === "completed" ? "btn-filter-active" : undefined}
+                </Button>
+                <Button variant={"contained"} size={"small"}
+                    color={props.filter === "completed" ? "secondary" : "primary"}
                     onClick={() => props.changeFilter("completed", props.todoLIstId)}>Completed
-                </button>
+                </Button>
             </div>
         </div>
     );

@@ -1,6 +1,7 @@
 import React, {ChangeEvent, FC, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCirclePlus, faDeleteLeft, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {IconButton, TextField} from "@mui/material";
 
 type AddItemFormPropsType = {
     maxItemTitleLength: number
@@ -31,8 +32,8 @@ export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
         setTitle("")
     }
     return (
-        <div>
-            <input
+        <div className={"form-wrapp"}>
+            <TextField size={'small'} placeholder={'Please, enter title'}
                 value={title}
                 onChange={changeItemTitle}
                 className={error ? "user-error" : undefined}
@@ -42,22 +43,19 @@ export const AddItemForm: FC<AddItemFormPropsType> = (props) => {
                     }
                 }}
             />
-            <button
-                disabled={isAddItemBtnDisabled}
-                onClick={addItem}>
+            <IconButton size={"small"} disabled={isAddItemBtnDisabled}
+                        onClick={addItem}>
                 <FontAwesomeIcon icon={faCirclePlus}/>
-            </button>
-
-            <button
-                disabled={!title}
-                onClick={() => setTitle(title.slice(0, -1))}>
+            </IconButton>
+            <IconButton size={"small"} disabled={!title}
+                        onClick={() => setTitle(title.slice(0, -1))}>
                 <FontAwesomeIcon icon={faDeleteLeft}/>
-            </button>
-            <button
-                disabled={!title}
-                onClick={() => setTitle("")}>
+            </IconButton>
+            <IconButton size={"small"} disabled={!title}
+                        onClick={() => setTitle("")}>
                 <FontAwesomeIcon icon={faTrash}/>
-            </button>
+            </IconButton>
+
             {isItemTitleLengthTooLong && <div>Your title is too long</div>}
             {error && <div style={{"color": "red", "fontWeight": "bold"}}>Please, enter correct title</div>}
         </div>
