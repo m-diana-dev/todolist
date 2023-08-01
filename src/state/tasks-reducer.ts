@@ -13,7 +13,18 @@ export type changeTaskTitleActionType = ReturnType<typeof changeTaskTitleAC>
 
 export type TasksActionsType = RemoveTaskActionType | AddTaskActionType | ChangeTaskStatusActionType | changeTaskTitleActionType | AddTodolistActionType | RemoveTodolistActionType;
 
-export const tasksReducer = (state: TasksStateType, action: TasksActionsType):TasksStateType => {
+
+const initialState: TasksStateType = {
+    ['todolistId1']: [
+        {id: v1(), title: "HTML&CSS", isDone: true},
+        {id: v1(), title: "JS", isDone: true}
+    ],
+    ['todolistId2']: [
+        {id: v1(), title: "Milk", isDone: true},
+        {id: v1(), title: "React Book", isDone: true}
+    ]
+}
+export const tasksReducer = (state = initialState, action: TasksActionsType):TasksStateType => {
     switch (action.type) {
         case 'REMOVE-TASK':
             return {...state, [action.todoLIstId]: state[action.todoLIstId].filter(el=>el.id!==action.taskId)}
@@ -32,7 +43,7 @@ export const tasksReducer = (state: TasksStateType, action: TasksActionsType):Ta
             // delete stateCopy[action.id]
             // return stateCopy
         default:
-            throw new Error("I don't understand this type")
+            return state
     }
 }
 
