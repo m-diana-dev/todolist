@@ -38,3 +38,13 @@ export const TaskIsDoneStory: Story = {
 };
 
 export const TaskIsNotDoneStory: Story = {};
+export const TaskPresentation = () => {
+    const [taskStatus, setTaskStatus] = useState(false)
+    const [taskTitle, setTaskTitle] = useState('CSS')
+    return <Task id={'1'}
+                 isDone={taskStatus}
+                 title={taskTitle}
+                 removeTask={action('Remove task')}
+                 changeTaskStatus={() => setTaskStatus(!taskStatus)}
+                 changeTaskTitle={(_, newTitle) => setTaskTitle(newTitle)}/>
+}

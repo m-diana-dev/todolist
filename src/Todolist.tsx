@@ -73,7 +73,7 @@ export const Todolist = memo((props: PropsType) => {
         <AddItemForm addItem={addTask}/>
         <div>
             {
-                props.tasks.map(t => {
+                tasks.map(t => {
                     // return <Task key={t.id}
                     //              id={t.id}
                     //              isDone={t.isDone}
