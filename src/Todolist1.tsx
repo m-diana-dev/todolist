@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from 'react';
-import {FilterValuesType, TodolistType} from './App';
-import {AddItemForm} from './AddItemForm';
+import {FilterValuesType, TodolistType} from './App/App';
+import {AddItemForm} from './AddItemForm/AddItemForm';
 import {EditableSpan} from './EditableSpan';
 import IconButton from '@mui/material/IconButton/IconButton';
 import {Delete} from "@mui/icons-material";

@@ -1,11 +1,11 @@
 import type {Meta, StoryObj} from '@storybook/react';
 
-import {AddItemForm, AddItemFormPropsType} from "../AddItemForm";
+import {AddItemForm, AddItemFormPropsType} from "../AddItemForm/AddItemForm";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {IconButton, TextField} from "@mui/material";
 import {AddBox} from "@mui/icons-material";
 import {action} from "@storybook/addon-actions"
-import AppWithRedux from "../AppWithRedux";
+import AppWithRedux from "../AppWithRedux/AppWithRedux";
 import {Provider} from "react-redux";
 import {store} from "../state/store";
 import {ReduxStoreProviderDecorator} from "../state/ReduxStoreProviderDecorator";
